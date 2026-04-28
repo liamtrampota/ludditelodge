@@ -719,6 +719,157 @@ const PlateSolitude = ({ className = '' }) => (
 );
 
 /* ============================================================
+   4b. SUPPLEMENTARY PLATES — Events, Residency
+   ============================================================ */
+const PlateEvents = ({ className = '' }) => (
+  <svg viewBox="0 0 600 420" className={className} aria-hidden="true">
+    <WCFilters id="pev" />
+    <rect width="600" height="420" fill={WC.parchment2} />
+    <rect width="600" height="420" fill={WC.goldHour} opacity="0.12" />
+    {/* barn ceiling / back wall — warm wash */}
+    <g filter="url(#pev-bleed-strong)">
+      <rect x="0" y="0" width="600" height="420" fill={WC.clayLight} opacity="0.22" />
+      <rect x="0" y="0" width="600" height="200" fill={WC.cream} opacity="0.72" />
+    </g>
+    {/* string lights — catenary curves */}
+    {[0, 1, 2, 3, 4].map((row) => {
+      const y0 = 28 + row * 28;
+      const sag = 10 + row * 4;
+      const bulbCount = 8;
+      return (
+        <g key={row}>
+          <path
+            d={`M 0,${y0} Q 300,${y0 + sag} 600,${y0}`}
+            stroke={WC.ink2} strokeWidth="0.7" fill="none" opacity="0.5"
+          />
+          {Array.from({ length: bulbCount }).map((_, b) => {
+            const t = b / (bulbCount - 1);
+            const bx = t * 600;
+            const by = y0 + sag * 4 * t * (1 - t);
+            return (
+              <g key={b}>
+                <circle cx={bx} cy={by} r="4.5" fill={WC.goldHour} opacity="0.9" />
+                <circle cx={bx} cy={by} r="9" fill={WC.goldHour} opacity="0.22" filter="url(#pev-soft)" />
+              </g>
+            );
+          })}
+        </g>
+      );
+    })}
+    {/* stage platform */}
+    <g filter="url(#pev-bleed)">
+      <rect x="160" y="160" width="280" height="12" fill={WC.ink2} opacity="0.7" rx="2" />
+      <rect x="160" y="172" width="280" height="8" fill={WC.clayDeep} opacity="0.5" />
+    </g>
+    {/* performer — single figure at center */}
+    <g filter="url(#pev-bleed)" transform="translate(300, 110)">
+      <ellipse cx="0" cy="50" rx="80" ry="8" fill={WC.goldHour} opacity="0.35" filter="url(#pev-soft)" />
+      <circle cx="0" cy="-8" r="13" fill={WC.ink2} opacity="0.82" />
+      <path d="M-10,6 Q0,50 10,6" fill={WC.pine2} opacity="0.88" />
+      <path d="M-10,12 Q-22,34 -20,48" stroke={WC.ink2} strokeWidth="3" fill="none" opacity="0.8" />
+      <path d="M10,12 Q18,30 16,44" stroke={WC.ink2} strokeWidth="3" fill="none" opacity="0.8" />
+      {/* guitar body */}
+      <ellipse cx="22" cy="32" rx="11" ry="14" fill={WC.clay} opacity="0.78" />
+      <ellipse cx="22" cy="22" rx="7" ry="9" fill={WC.clay} opacity="0.72" />
+      <line x1="22" y1="13" x2="22" y2="-2" stroke={WC.ink2} strokeWidth="2" opacity="0.7" />
+    </g>
+    {/* audience — four rows of figures */}
+    {[230, 268, 306, 344].map((rowY, row) => (
+      Array.from({ length: 8 }).map((_, i) => (
+        <g key={`${row}-${i}`} filter="url(#pev-bleed)" transform={`translate(${44 + i * 72}, ${rowY})`}>
+          <rect x="-12" y="0" width="24" height="28" fill={WC.clayDeep} opacity={0.38 + row * 0.07} rx="2" />
+          {row < 3 && (
+            <circle cx="0" cy="-8" r={9 - row} fill={WC.ink2} opacity={0.55 + row * 0.08} />
+          )}
+        </g>
+      ))
+    ))}
+    {/* warm floor glow beneath stage */}
+    <ellipse cx="300" cy="170" rx="130" ry="22" fill={WC.goldHour} opacity="0.28" filter="url(#pev-soft)" />
+  </svg>
+);
+
+const PlateResidency = ({ className = '' }) => (
+  <svg viewBox="0 0 600 420" className={className} aria-hidden="true">
+    <WCFilters id="prs" />
+    <rect width="600" height="420" fill={WC.parchment2} />
+    <rect width="600" height="420" fill={WC.cream} opacity="0.35" />
+    {/* large studio window */}
+    <g filter="url(#prs-bleed)">
+      <rect x="50" y="28" width="220" height="180" fill={WC.slate} opacity="0.48" />
+      <line x1="160" y1="28" x2="160" y2="208" stroke={WC.ink2} strokeWidth="2.5" opacity="0.72" />
+      <line x1="50" y1="118" x2="270" y2="118" stroke={WC.ink2} strokeWidth="2.5" opacity="0.72" />
+      <rect x="46" y="24" width="228" height="188" fill="none" stroke={WC.ink2} strokeWidth="3" opacity="0.85" />
+      {/* tree canopy outside */}
+      <ellipse cx="95" cy="175" rx="28" ry="50" fill={WC.pine} opacity="0.62" />
+      <ellipse cx="185" cy="182" rx="34" ry="42" fill={WC.pine2} opacity="0.65" />
+      <ellipse cx="248" cy="190" rx="20" ry="32" fill={WC.pineDeep} opacity="0.55" />
+      {/* light flooding in */}
+      <rect x="50" y="28" width="220" height="180" fill={WC.goldHour} opacity="0.09" />
+    </g>
+    {/* workbench top */}
+    <g filter="url(#prs-bleed)">
+      <rect x="20" y="268" width="420" height="16" fill={WC.ink2} opacity="0.88" />
+      <rect x="20" y="284" width="420" height="70" fill={WC.clay} opacity="0.62" />
+      {/* bench front grain */}
+      <rect x="20" y="284" width="420" height="70" fill={WC.clayDeep} opacity="0.12" filter="url(#prs-grain)" />
+    </g>
+    {/* tools on bench surface */}
+    <g filter="url(#prs-bleed)">
+      {/* hand plane */}
+      <rect x="48" y="248" width="52" height="18" fill={WC.clayDeep} opacity="0.9" rx="2" />
+      <rect x="54" y="244" width="14" height="8" fill={WC.ink2} opacity="0.8" />
+      {/* chisel */}
+      <rect x="122" y="238" width="5" height="36" fill={WC.ink2} opacity="0.82" transform="rotate(-6, 124, 256)" />
+      <rect x="119" y="262" width="11" height="7" fill={WC.clay} opacity="0.75" transform="rotate(-6, 124, 265)" />
+      {/* wood shavings */}
+      {[160, 175, 192, 207, 222].map((x, i) => (
+        <path key={i}
+          d={`M${x},264 q ${3 + i * 1.5},${-7 - i * 2} ${10 + i},0`}
+          stroke={WC.cream} strokeWidth="1.4" fill="none" opacity="0.9"
+        />
+      ))}
+      {/* open sketchbook */}
+      <rect x="256" y="240" width="84" height="64" fill={WC.parchment} opacity="0.96" />
+      <line x1="298" y1="240" x2="298" y2="304" stroke={WC.ink2} strokeWidth="0.8" opacity="0.45" />
+      {[248, 255, 262, 269, 276, 283].map((y, i) => (
+        <line key={i} x1="260" y1={y} x2="295" y2={y} stroke={WC.ink2} strokeWidth="0.5" opacity="0.35" />
+      ))}
+      {/* coffee cup */}
+      <rect x="358" y="250" width="22" height="26" fill={WC.parchment} opacity="0.92" rx="2" />
+      <path d="M380,258 Q390,258 390,266 Q390,274 380,274" stroke={WC.ink2} strokeWidth="1.5" fill="none" opacity="0.6" />
+      <line x1="358" y1="258" x2="380" y2="258" stroke={WC.ink2} strokeWidth="0.8" opacity="0.4" />
+    </g>
+    {/* wall shelves with materials */}
+    <g filter="url(#prs-bleed)" transform="translate(354, 40)">
+      <rect x="0" y="60" width="200" height="7" fill={WC.ink2} opacity="0.72" />
+      <rect x="0" y="148" width="200" height="7" fill={WC.ink2} opacity="0.72" />
+      {/* jars on upper shelf */}
+      {[12, 44, 76, 108, 140, 170].map((x, i) => (
+        <g key={i}>
+          <rect x={x} y={28} width="22" height="30" fill={[WC.clay, WC.pine, WC.slate, WC.cream, WC.goldHour, WC.rose][i]} opacity="0.82" rx="2" />
+          <rect x={x + 4} y={24} width="14" height="6" fill={WC.parchment} opacity="0.7" rx="1" />
+        </g>
+      ))}
+      {/* books standing on lower shelf */}
+      {[12, 36, 60, 84, 110, 136, 160].map((x, i) => (
+        <rect key={i} x={x} y={116} width={i % 3 === 0 ? 22 : 18} height="30"
+          fill={[WC.pine2, WC.clay, WC.ink2, WC.slate, WC.clayDeep, WC.pine, WC.cream][i]}
+          opacity="0.78" rx="1"
+        />
+      ))}
+    </g>
+    {/* wood floor planks */}
+    <g filter="url(#prs-bleed-strong)">
+      <rect x="0" y="354" width="600" height="66" fill={WC.clay} opacity="0.68" />
+      {[360, 380, 400].map((y) => (
+        <line key={y} x1="0" y1={y} x2="600" y2={y} stroke={WC.clayDeep} strokeWidth="0.7" opacity="0.35" />
+      ))}
+    </g>
+  </svg>
+);
+
+/* ============================================================
    5. ACCOMMODATION CARDS — Lodge, Dorms, A-frames (exterior + interior)
    ============================================================ */
 const RoomLodge = ({ className = '' }) => (
@@ -1419,7 +1570,10 @@ const TopBar = () => (
       <a href="#stay" className="ink-link">Stay</a>
       <a href="#bar" className="ink-link">The lodge</a>
       <a href="#weekend" className="ink-link">A weekend</a>
+      <a href="#events" className="ink-link">Events</a>
+      <a href="#residency" className="ink-link">Residency</a>
       <a href="#location" className="ink-link">Location</a>
+      <a href="#waitlist" className="ink-link">Join the list</a>
       <a href="#opportunity" className="ink-link">The opportunity</a>
     </nav>
   </header>
@@ -1450,8 +1604,8 @@ const Hero = () => (
           <span className="italic">in the Catskills.</span>
         </h1>
         <p className="mt-8 max-w-[560px] text-parchment/90 text-[19px] leading-[1.55]" style={{ textShadow: '0 1px 12px rgba(20,16,10,0.6)' }}>
-          Two hours from New York, Luddite Lodge trades pings for paper maps, long-table dinners,
-          quiet rooms, and enough open space to hear yourself think again.
+          Two hours from Penn Station. Phones stay at the desk. Iron key, folded map, dinner
+          at half past seven. Opening 2027.
         </p>
       </div>
     </div>
@@ -1572,8 +1726,12 @@ const BeforeAfter = () => {
         <div className="text-center mb-14 reveal">
           <p className="small-caps text-[12px] text-ink/60 mb-5">v. the difference</p>
           <h2 className="font-display text-[36px] md:text-[54px] leading-[1.05] tracking-[-0.01em] max-w-[720px] mx-auto">
-            The same dinner, once the table has the room.
+            One table.<br />
+            <span className="italic text-ink/75">Two versions of the same dinner.</span>
           </h2>
+          <p className="mt-6 text-ink2 text-[18px] leading-[1.65] max-w-[540px] mx-auto">
+            Drag to compare. The food is identical. The room is not.
+          </p>
         </div>
 
         <div
@@ -1631,7 +1789,7 @@ const BeforeAfter = () => {
         </div>
 
         <p className="marginalia text-center font-hand text-[22px] text-ink/70 mt-6 reveal">
-          drag the divider to feel the room change.
+          — the bistro, half past seven.
         </p>
       </div>
     </section>
@@ -1646,8 +1804,8 @@ const DIMENSIONS = [
     n: 'i',
     title: 'Restoration',
     body: [
-      `A pool nestled into the slope, fed by a quiet circulating spring. A wood-fired sauna tucked into the trees. Beds with linen sheets, windows that open, and curtains that actually black the room out.`,
-      `The restoration here is practical: warm rooms, early kitchen hours, quiet grounds by ten, and mornings soft enough that you can hear the first chair move on the porch.`,
+      `A spring-fed pool cut into the hillside, cold enough in August to remind you where you are. A wood-fired sauna behind the birch stand. Beds dressed in linen, curtains that do the job, and windows that open onto the forest at night.`,
+      `We don't program the recovery. We remove what interrupts it. Quiet grounds after ten, mornings soft enough to hear the first chair move on the porch, and a kitchen that opens before the trails do.`,
     ],
     Plate: PlateRestoration,
     cap: 'the pool — the spring keeps it cold all summer.',
@@ -1656,41 +1814,61 @@ const DIMENSIONS = [
     n: 'ii',
     title: 'Connection',
     body: [
-      `The bistro sits at the heart of the lodge: a small bar, a few farm specials, and a long table for nights when everyone lands there at once. You can eat with the room or take a plate to the porch.`,
-      `During the day the shared kitchen stays easy — kettle on, beans ground, the bread board out. People can arrive alone here without spending the weekend that way.`,
+      `Dinner at the bistro starts at half past seven: a few specials from nearby farms, set at the long table. You sit where there's room. The kitchen grows the vegetables; the valley does the rest.`,
+      `During the day the shared kitchen stays open — kettle on, bread board out, beans ground. A few guests arrive alone and leave with plans for next autumn.`,
     ],
     Plate: PlateConnection,
-    cap: 'the bistro, single seating, seven thirty.',
+    cap: 'the bistro — single seating, half past seven.',
   },
   {
     n: 'iii',
     title: 'Creativity',
     body: [
-      `Kids get disposable cameras. We develop the film and mail the prints. There are journals in every room, books on the shelves chosen by people we trust, and an upright piano in the lodge that's only a little out of tune.`,
-      `Films screen on the lawn on summer Saturdays — sheet, projector, blanket, fireflies. In the colder months, they move to the reading room.`,
+      `A shelf of journals in every room. A stack of field guides no one owns. An upright piano in the reading room that holds its tune imperfectly. Kids get disposable cameras; we develop the rolls and mail the prints after checkout.`,
+      `Film nights run on the lawn in summer — a white sheet, a projector, fireflies filling in the rest. In winter they move inside and start a little earlier.`,
     ],
     Plate: PlateCreativity,
-    cap: 'a journal, a leaf, a Yashica.',
+    cap: 'a journal, a leaf, a Yashica T4.',
   },
   {
     n: 'iv',
     title: 'Movement',
     body: [
-      `Twelve miles of marked trail through hardwood and hemlock, all drawn onto your folded paper map. A foraging walk most mornings led by a guide who knows the names of things. Yoga on the deck at seven, optional, free.`,
-      `If you need a long run, you'll find one. If you need a slow walk to a particular bench by a particular pond, you'll find that too. The map shows both.`,
+      `Twelve miles of trail through old-growth hardwood and hemlock, hand-drawn onto your folded map. A foraging walk most mornings with a guide who knows the difference between sumac and poison oak. Yoga on the upper deck at seven — optional, no mat required.`,
+      `The map marks a bench by the lower pond that takes forty minutes to reach at a proper pace. Most people take longer. It's worth taking longer.`,
     ],
     Plate: PlateMovement,
-    cap: 'the upper trail, in the soft season.',
+    cap: 'the upper trail — mile four, soft season.',
   },
   {
     n: 'v',
     title: 'Solitude',
     body: [
-      `Eight standalone A-frame cabins in the trees, far enough apart that you can hear the creek and not your neighbor. A reading nook in each, a wood stove, a porch large enough for two chairs and a dog.`,
-      `Some guests take a single A-frame for a week and rarely make it to the lodge for dinner. We respect that. The map shows where the bistro will deliver.`,
+      `Eight A-frame cabins in the trees, spaced far enough apart to hear the creek and not your neighbor. A wood stove in each that takes a little patience, a reading nook with a lamp, a porch with two chairs and room for a dog.`,
+      `Some guests arrive, light the stove, and don't make it to the lodge for dinner once. We leave them to it. The bistro delivers to the eastern path.`,
     ],
     Plate: PlateSolitude,
-    cap: 'the eastern A-frame, half past seven.',
+    cap: 'the eastern A-frame — the long way around.',
+  },
+  {
+    n: 'vi',
+    title: 'Events',
+    body: [
+      `Each season the lodge runs a short calendar: a concert in the barn, a visiting chef taking over the bistro, a small exhibition, an outdoor screening with a guest speaker. Open to current guests and a modest walk-in list.`,
+      `Nothing is ticketed far in advance. The schedule is printed and posted at the bar each week. The idea is that the best things here happen without much planning on your part.`,
+    ],
+    Plate: PlateEvents,
+    cap: 'the barn — first friday of the month.',
+  },
+  {
+    n: 'vii',
+    title: 'Residency',
+    body: [
+      `A small number of residents live and work at the lodge each season — a chef developing a menu, a woodworker building furniture for the rooms, a farmer on the kitchen garden, an artist finishing a body of work. Residencies run four to twelve weeks.`,
+      `Residents eat at the bistro, sleep in a lodge room, and contribute something specific to the place. The granary has been converted into a studio. Applications open in March.`,
+    ],
+    Plate: PlateResidency,
+    cap: 'the granary studio — residency hours.',
   },
 ];
 
@@ -1700,10 +1878,10 @@ const Dimensions = () => (
       <div className="text-center max-w-[760px] mx-auto reveal mb-20 md:mb-28">
         <p className="small-caps text-[12px] text-ink/60 mb-5">ii. the dimensions</p>
         <h2 className="font-display text-[36px] md:text-[54px] leading-[1.05] tracking-[-0.01em]">
-          Five ways a weekend can open.
+          Seven ways a weekend can open.
         </h2>
         <p className="mt-6 text-ink2 text-[18px] leading-[1.65]">
-          The property is built around five rhythms. None are mandatory. Most happen whether
+          The property is built around seven rhythms. None are mandatory. Most happen whether
           you join in or simply let them shape the background.
         </p>
       </div>
@@ -1954,10 +2132,140 @@ const Weekend = () => (
 /* ============================================================
    7. ETHOS — long prose + pull quote
    ============================================================ */
+
+/* ============================================================
+   7a. EVENTS — seasonal programming
+   ============================================================ */
+const EVENTS_LIST = [
+  {
+    type: 'Music',
+    examples: 'A concert in the barn. A string quartet on the upper deck. A pianist in the reading room. Usually a single performer, occasionally a duo. Always a small room.',
+  },
+  {
+    type: 'Visiting chefs',
+    examples: 'One weekend a month a chef takes over the bistro — a different menu, a different hand. Local farmers cook once a season. Staff cook the rest.',
+  },
+  {
+    type: 'Exhibitions',
+    examples: 'Small shows in the lodge: a photographer who spent a season in the valley, a woodworker\u2019s new series, an artist from the current residency. Work is available to buy; we handle the paperwork.',
+  },
+  {
+    type: 'Screenings & talks',
+    examples: 'A film on the lawn in summer with a guest introduction. A conversation about a book, a landscape, an idea. Nothing keynote-style — more like a long dinner that starts with a question.',
+  },
+];
+
+const Events = () => (
+  <section id="events" className="relative px-8 md:px-20 py-24 md:py-36 bg-parchment2/40">
+    <div className="max-w-[1180px] mx-auto">
+      <div className="text-center max-w-[760px] mx-auto mb-16 reveal">
+        <p className="small-caps text-[12px] text-ink/60 mb-5">vii. events</p>
+        <h2 className="font-display text-[36px] md:text-[54px] leading-[1.05] tracking-[-0.01em]">
+          A short calendar.<br />
+          <span className="italic text-ink/75">Printed, not announced.</span>
+        </h2>
+        <p className="mt-6 text-ink2 text-[18px] leading-[1.65] max-w-[600px] mx-auto">
+          Each season the lodge hosts a small number of events: concerts, exhibitions, visiting chefs,
+          outdoor screenings. Open to current guests and a walk-in list. Nothing ticketed months ahead.
+          The schedule is posted at the bar each week.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-10 md:gap-14 max-w-[900px] mx-auto">
+        {EVENTS_LIST.map((e) => (
+          <div key={e.type} className="reveal">
+            <p className="small-caps text-[11px] text-ink/55 mb-3">{e.type}</p>
+            <p className="text-ink2 text-[18px] leading-[1.7]">{e.examples}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-20 text-center reveal">
+        <p className="font-hand text-[22px] text-ink/60">
+          — the barn, first friday of the month.
+        </p>
+      </div>
+    </div>
+  </section>
+);
+
+/* ============================================================
+   7b. RESIDENCY — long-term creative residencies
+   ============================================================ */
+const RESIDENCY_TRACKS = [
+  {
+    track: 'Culinary',
+    detail: 'A chef or food researcher develops a menu or project, cooking at the bistro one or two nights a week. The kitchen garden and the valley farms are at their disposal.',
+  },
+  {
+    track: 'Craft & making',
+    detail: 'A woodworker, weaver, ceramicist, or maker works in the granary studio. Resident work often ends up in the lodge — a chair, a set of bowls, a piece of textile on the wall.',
+  },
+  {
+    track: 'Land & farming',
+    detail: 'A farmer or ecologist works on the kitchen garden, the orchard, or a research project with the land. The lodge has six acres of cultivated ground and a working composting operation.',
+  },
+  {
+    track: 'Art & writing',
+    detail: 'An artist or writer completes a body of work. The granary has a large skylight, north-facing, and good silence. Exhibitions and readings are offered at the end of each residency.',
+  },
+];
+
+const Residency = () => (
+  <section id="residency" className="relative px-8 md:px-20 py-24 md:py-36">
+    <div className="max-w-[1180px] mx-auto">
+      <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
+        <div className="md:col-span-5 reveal">
+          <p className="small-caps text-[12px] text-ink/60 mb-5">viii. residency</p>
+          <h2 className="font-display text-[36px] md:text-[54px] leading-[1.05] tracking-[-0.01em] mb-8">
+            Live here.<br />
+            <span className="italic text-ink/75">Make something.</span>
+          </h2>
+          <div className="space-y-5 text-ink2 text-[18px] leading-[1.75]">
+            <p>
+              A small number of residents live and work at the lodge each season — a chef developing
+              a menu, a woodworker building furniture for the rooms, a farmer working the kitchen
+              garden, an artist finishing a body of work.
+            </p>
+            <p>
+              Residencies run four to twelve weeks. Residents eat at the bistro, sleep in a lodge
+              room, and contribute something specific to the place. The contribution is part of the
+              agreement: the work either stays at the lodge or is shown here before it goes elsewhere.
+            </p>
+            <p>
+              Applications open in March. We take four residents per season. The granary has been
+              converted into a shared studio with good north light, a separate entrance, and enough
+              quiet to work in.
+            </p>
+          </div>
+          <p className="font-hand text-[20px] text-ink/60 mt-8">— applications open each March.</p>
+        </div>
+
+        <div className="md:col-span-7 reveal">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {RESIDENCY_TRACKS.map((r) => (
+              <div key={r.track} className="border-t border-ink/15 pt-6">
+                <p className="small-caps text-[11px] text-ink/55 mb-3">{r.track}</p>
+                <p className="text-ink2 text-[17px] leading-[1.7]">{r.detail}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12">
+            <PlateResidency className="w-full h-auto opacity-90" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+/* ============================================================
+   9. ETHOS — long prose + pull quote
+   ============================================================ */
 const Ethos = () => (
   <section className="relative px-8 md:px-20 py-28 md:py-40 bg-parchment2/60">
     <div className="max-w-[820px] mx-auto reveal">
-      <p className="small-caps text-[12px] text-ink/60 mb-6 text-center">vii. ethos</p>
+      <p className="small-caps text-[12px] text-ink/60 mb-6 text-center">ix. ethos</p>
       <h2 className="font-display text-[36px] md:text-[54px] leading-[1.05] tracking-[-0.01em] text-center mb-14">
         Why a hotel, and why like this.
       </h2>
@@ -2011,7 +2319,7 @@ const Location = () => (
   <section id="location" className="relative px-8 md:px-20 py-24 md:py-32">
     <div className="max-w-[1320px] mx-auto">
       <div className="text-center max-w-[760px] mx-auto mb-16 reveal">
-      <p className="small-caps text-[12px] text-ink/60 mb-5">viii. the location</p>
+      <p className="small-caps text-[12px] text-ink/60 mb-5">x. the location</p>
         <h2 className="font-display text-[36px] md:text-[54px] leading-[1.05] tracking-[-0.01em]">
           Two hours from Penn Station,<br />far enough to feel it.
         </h2>
@@ -2049,6 +2357,67 @@ const Location = () => (
 );
 
 /* ============================================================
+   8b. WAITLIST — guest-facing email capture
+   ============================================================ */
+const Waitlist = () => {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubmitted(true);
+  };
+
+  return (
+    <section id="waitlist" className="relative px-8 md:px-20 py-28 md:py-40 bg-ink text-parchment">
+      <div className="max-w-[760px] mx-auto text-center reveal">
+        <Mark size={34} className="mx-auto mb-10 opacity-60" />
+        <p className="small-caps text-[12px] text-parchment/55 mb-6 tracking-[0.18em]">
+          opening 2027 · catskills
+        </p>
+        <h2 className="font-display text-[36px] md:text-[56px] leading-[1.03] tracking-[-0.01em] mb-7">
+          Be the first to know<br />
+          <span className="italic text-parchment/80">when the phones go away.</span>
+        </h2>
+        <p className="text-parchment/70 text-[18px] leading-[1.65] mb-12 max-w-[520px] mx-auto">
+          No newsletter. One email when bookings open — early access for waitlist guests before
+          the general release. We'll write back if you have questions.
+        </p>
+
+        {submitted ? (
+          <div className="space-y-4">
+            <p className="font-hand text-[28px] text-parchment/90">You're on the list.</p>
+            <p className="text-parchment/55 text-[16px]">We'll be in touch before 2027.</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-[480px] mx-auto">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              className="flex-1 bg-transparent border border-parchment/35 px-5 py-3.5 text-parchment placeholder:text-parchment/35 text-[17px] font-body focus:outline-none focus:border-parchment/75 transition-colors"
+            />
+            <button
+              type="submit"
+              className="px-7 py-3.5 bg-parchment text-ink text-[14px] small-caps tracking-[0.14em] hover:bg-cream transition-colors whitespace-nowrap"
+            >
+              Join the list
+            </button>
+          </form>
+        )}
+
+        <p className="font-hand text-[16px] text-parchment/40 mt-8">
+          — no phones, no newsletters, no exceptions.
+        </p>
+      </div>
+    </section>
+  );
+};
+
+/* ============================================================
    9. THE OPPORTUNITY — investor section, editorial
    ============================================================ */
 const Opportunity = () => (
@@ -2057,7 +2426,7 @@ const Opportunity = () => (
 
       {/* — opener — */}
       <div className="max-w-[860px] mx-auto reveal">
-        <p className="small-caps text-[12px] text-parchment/60 mb-6">ix. the opportunity</p>
+        <p className="small-caps text-[12px] text-parchment/60 mb-6">xi. the opportunity</p>
         <h2 className="font-display text-[40px] md:text-[68px] leading-[1.0] tracking-[-0.012em] mb-10">
           A clear category,<br />
           <span className="italic text-parchment/85">built on a single rule.</span>
@@ -2211,31 +2580,69 @@ const Opportunity = () => (
 /* ============================================================
    10. FOOTER
    ============================================================ */
-const Footer = () => (
-  <footer className="relative px-8 md:px-20 py-24 text-center">
-    <div className="max-w-[640px] mx-auto reveal">
-      <div className="flex justify-center mb-8">
-        <Mark size={42} />
-      </div>
-      <p className="marginalia font-hand text-[28px] text-ink/85 leading-[1.3] mb-4">
-        Thank you for reading.<br />
-        We hope to see you upstate.
-      </p>
-      <p className="font-display italic text-[18px] text-ink/60 mb-10">— the lodge</p>
+const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-      <div className="flex flex-col items-center gap-5 text-ink2 text-[15px]">
-        <Wordmark className="text-ink/85" size="large" />
-        <p className="small-caps text-[11px] text-ink/55">phone-free weekends · catskills · 2027</p>
-        <a href="mailto:lodge@ludditelodge.com" className="ink-link">lodge@ludditelodge.com</a>
-      </div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubmitted(true);
+  };
 
-      <p className="font-hand text-[15px] text-ink/40 mt-14 max-w-[440px] mx-auto leading-[1.5]">
-        Concept site. All renderings are watercolor studies; the property is in development.
-        No social, no app. We'll write back.
-      </p>
-    </div>
-  </footer>
-);
+  return (
+    <footer className="relative px-8 md:px-20 py-24 text-center">
+      <div className="max-w-[640px] mx-auto reveal">
+        <div className="flex justify-center mb-8">
+          <Mark size={42} />
+        </div>
+        <p className="marginalia font-hand text-[28px] text-ink/85 leading-[1.3] mb-4">
+          Thank you for reading.<br />
+          We hope to see you upstate.
+        </p>
+        <p className="font-display italic text-[18px] text-ink/60 mb-10">— the lodge</p>
+
+        {/* compact waitlist */}
+        <div className="border-t border-ink/12 pt-10 mb-10">
+          {submitted ? (
+            <p className="font-hand text-[22px] text-ink/70">You're on the list. See you in 2027.</p>
+          ) : (
+            <>
+              <p className="small-caps text-[11px] text-ink/50 mb-5 tracking-[0.14em]">opening 2027 · join the waitlist</p>
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5 max-w-[400px] mx-auto">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  className="flex-1 border border-ink/25 bg-transparent px-4 py-3 text-ink placeholder:text-ink/30 text-[16px] font-body focus:outline-none focus:border-ink/55 transition-colors"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-ink text-parchment text-[12px] small-caps tracking-[0.14em] hover:bg-ink/85 transition-colors whitespace-nowrap"
+                >
+                  Join
+                </button>
+              </form>
+            </>
+          )}
+        </div>
+
+        <div className="flex flex-col items-center gap-5 text-ink2 text-[15px]">
+          <Wordmark className="text-ink/85" size="large" />
+          <p className="small-caps text-[11px] text-ink/55">phone-free weekends · catskills · 2027</p>
+          <a href="mailto:lodge@ludditelodge.com" className="ink-link">lodge@ludditelodge.com</a>
+        </div>
+
+        <p className="font-hand text-[15px] text-ink/40 mt-14 max-w-[440px] mx-auto leading-[1.5]">
+          Concept site. All renderings are watercolor studies; the property is in development.
+          No social, no app. We'll write back.
+        </p>
+      </div>
+    </footer>
+  );
+};
 
 /* ============================================================
    APP
@@ -2280,8 +2687,11 @@ function App() {
         <BarBistro />
         <BeforeAfter />
         <Weekend />
+        <Events />
+        <Residency />
         <Ethos />
         <Location />
+        <Waitlist />
         <Opportunity />
         <Footer />
       </main>
