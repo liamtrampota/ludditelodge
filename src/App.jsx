@@ -1446,8 +1446,8 @@ const Hero = () => (
       <div className="max-w-[860px]">
         <p className="small-caps text-[12px] text-parchment/80 mb-6">Catskills · phone-free weekends · opening 2027</p>
         <h1 className="font-display text-[44px] md:text-[78px] leading-[0.98] tracking-[-0.01em] text-parchment" style={{ textShadow: '0 2px 24px rgba(20,16,10,0.55)' }}>
-          A lodge for weekends<br />
-          <span className="italic">that come back to you.</span>
+          A phone-free lodge<br />
+          <span className="italic">in the Catskills.</span>
         </h1>
         <p className="mt-8 max-w-[560px] text-parchment/90 text-[19px] leading-[1.55]" style={{ textShadow: '0 1px 12px rgba(20,16,10,0.6)' }}>
           Two hours from New York, Luddite Lodge trades pings for paper maps, long-table dinners,
