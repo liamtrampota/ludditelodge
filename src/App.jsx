@@ -1629,23 +1629,24 @@ const Ritual = () => (
       <div className="md:col-span-6 reveal">
         <p className="small-caps text-[12px] text-ink/60 mb-6">i. the ritual</p>
         <h2 className="font-display text-[36px] md:text-[54px] leading-[1.05] tracking-[-0.01em] mb-8">
-          A small ceremony for crossing over.
+          Check in, put the phone away, get your bearings.
         </h2>
         <div className="font-body text-[19px] leading-[1.7] text-ink2 space-y-5">
           <p className="dropcap">
-            At check-in, the phone goes away and the weekend gets a little more physical.
-            You leave the desk with an iron key, a folded map, and a card for the next few days.
-            It is not meant to feel severe. It is meant to make the threshold visible.
+            On arrival, you'll trade your phone for a key and a folded map. The map is the only
+            thing in your pocket for the weekend. The key is iron, heavy enough to remember.
+            The phones go into a cedar drawer behind the desk — labelled, locked, returned at checkout.
           </p>
           <p>
-            The card has the rhythm of the place on it: coffee, sauna, bistro hours, dinner at
-            half past seven, maybe a foraging walk or a film on the lawn after dark. Enough
-            structure to enter the weekend, not so much that it starts to feel scheduled.
+            Alongside the key you'll receive an event card — a single thick paper rectangle with
+            the week's programming hand-lettered on the front. Yoga at seven. A foraging walk before
+            lunch. Dinner at the long table at half past seven. A film on the lawn after dark,
+            weather depending.
           </p>
           <p>
-            That is the whole system. Nothing to download, nothing to scan, nothing to manage.
-            The map shows the trails, the cabins, the pond, the bistro, and the places worth
-            reaching slowly. The rest you find by walking.
+            That's the whole onboarding. Nothing to download. Nothing to scan. The map shows where
+            the trails go and where they don't, and which of the cabins is yours. Walk slowly.
+            The light is different here.
           </p>
         </div>
       </div>
