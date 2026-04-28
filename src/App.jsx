@@ -1604,8 +1604,8 @@ const Hero = () => (
           <span className="italic">in the Catskills.</span>
         </h1>
         <p className="mt-8 max-w-[560px] text-parchment/90 text-[19px] leading-[1.55]" style={{ textShadow: '0 1px 12px rgba(20,16,10,0.6)' }}>
-          Two hours from Penn Station. Phones stay at the desk. Iron key, folded map, dinner
-          at half past seven. Opening 2027.
+          Two hours from New York, Luddite Lodge trades pings for paper maps, long-table dinners,
+          quiet rooms, and enough open space to hear yourself think again.
         </p>
       </div>
     </div>
@@ -1804,8 +1804,8 @@ const DIMENSIONS = [
     n: 'i',
     title: 'Restoration',
     body: [
-      `A spring-fed pool cut into the hillside, cold enough in August to remind you where you are. A wood-fired sauna behind the birch stand. Beds dressed in linen, curtains that do the job, and windows that open onto the forest at night.`,
-      `We don't program the recovery. We remove what interrupts it. Quiet grounds after ten, mornings soft enough to hear the first chair move on the porch, and a kitchen that opens before the trails do.`,
+      `A pool nestled into the slope, fed by a quiet circulating spring. A wood-fired sauna tucked into the trees. Beds with linen sheets, windows that open, and curtains that actually black the room out.`,
+      `The restoration here is practical: warm rooms, early kitchen hours, quiet grounds by ten, and mornings soft enough that you can hear the first chair move on the porch.`,
     ],
     Plate: PlateRestoration,
     cap: 'the pool — the spring keeps it cold all summer.',
@@ -1814,11 +1814,11 @@ const DIMENSIONS = [
     n: 'ii',
     title: 'Connection',
     body: [
-      `Dinner at the bistro starts at half past seven: a few specials from nearby farms, set at the long table. You sit where there's room. The kitchen grows the vegetables; the valley does the rest.`,
-      `During the day the shared kitchen stays open — kettle on, bread board out, beans ground. A few guests arrive alone and leave with plans for next autumn.`,
+      `The bistro sits at the heart of the lodge: a small bar, a few farm specials, and a long table for nights when everyone lands there at once. You can eat with the room or take a plate to the porch.`,
+      `During the day the shared kitchen stays easy — kettle on, beans ground, the bread board out. People can arrive alone here without spending the weekend that way.`,
     ],
     Plate: PlateConnection,
-    cap: 'the bistro — single seating, half past seven.',
+    cap: 'the bistro, single seating, seven thirty.',
   },
   {
     n: 'iii',
@@ -1834,11 +1834,11 @@ const DIMENSIONS = [
     n: 'iv',
     title: 'Movement',
     body: [
-      `Twelve miles of trail through old-growth hardwood and hemlock, hand-drawn onto your folded map. A foraging walk most mornings with a guide who knows the difference between sumac and poison oak. Yoga on the upper deck at seven — optional, no mat required.`,
-      `The map marks a bench by the lower pond that takes forty minutes to reach at a proper pace. Most people take longer. It's worth taking longer.`,
+      `Twelve miles of marked trail through hardwood and hemlock, all drawn onto your folded paper map. A foraging walk most mornings led by a guide who knows the names of things. Yoga on the deck at seven, optional, free.`,
+      `If you need a long run, you'll find one. If you need a slow walk to a particular bench by a particular pond, you'll find that too. The map shows both.`,
     ],
     Plate: PlateMovement,
-    cap: 'the upper trail — mile four, soft season.',
+    cap: 'the upper trail, in the soft season.',
   },
   {
     n: 'v',
