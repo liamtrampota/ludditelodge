@@ -1650,13 +1650,6 @@ const Hero = () => (
       </div>
     </div>
 
-    {/* scroll affordance */}
-    <a href="#ritual" className="absolute left-1/2 -translate-x-1/2 bottom-8 flex flex-col items-center gap-2 text-parchment/85 small-caps text-[10px]">
-      <span>scroll</span>
-      <svg width="14" height="22" viewBox="0 0 14 22" fill="none" stroke="currentColor" strokeWidth="1.2">
-        <path d="M7,2 L7,18 M2,13 L7,18 L12,13" strokeLinecap="round" />
-      </svg>
-    </a>
   </section>
 );
 
