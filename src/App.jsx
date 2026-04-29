@@ -1537,6 +1537,46 @@ const ACCENTS = {
 // expose tweaks to other modules via context
 const TweakContext = React.createContext(TWEAK_DEFAULTS);
 
+/* — Formspree endpoint (set VITE_FORMSPREE_ID in .env) — */
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ID
+  ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`
+  : null;
+
+/* — shared waitlist form hook — */
+function useWaitlist() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+
+    if (!FORMSPREE_ENDPOINT) {
+      // No endpoint configured — open mailto as fallback
+      window.open(
+        `mailto:lodge@ludditelodge.com?subject=Waitlist&body=${encodeURIComponent(email)}`,
+        '_blank'
+      );
+      setStatus('success');
+      return;
+    }
+
+    setStatus('loading');
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      setStatus(res.ok ? 'success' : 'error');
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  return { email, setEmail, status, handleSubmit };
+}
+
 /* — small reveal-on-scroll util — */
 function useReveal() {
   useEffect(() => {
@@ -1619,6 +1659,46 @@ const Hero = () => (
     </a>
   </section>
 );
+
+/* ============================================================
+   1b. EARLY SIGNUP — compact strip for high-intent arrivals
+   ============================================================ */
+const EarlySignup = () => {
+  const { email, setEmail, status, handleSubmit } = useWaitlist();
+  return (
+    <div className="relative bg-ink text-parchment px-8 md:px-20 py-6">
+      <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+        <p className="small-caps text-[12px] text-parchment/70 tracking-[0.16em] shrink-0">
+          Opening 2027 · Early access for waitlist guests
+        </p>
+        {status === 'success' ? (
+          <p className="font-hand text-[20px] text-parchment/85">You're on the list. See you upstate.</p>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex gap-2.5 w-full sm:w-auto sm:max-w-[420px]">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              className="flex-1 min-w-0 bg-transparent border border-parchment/35 px-4 py-2.5 text-parchment placeholder:text-parchment/30 text-[15px] font-body focus:outline-none focus:border-parchment/70 transition-colors"
+            />
+            <button
+              type="submit"
+              disabled={status === 'loading'}
+              className="px-5 py-2.5 bg-parchment text-ink text-[12px] small-caps tracking-[0.14em] hover:bg-cream transition-colors whitespace-nowrap disabled:opacity-60"
+            >
+              {status === 'loading' ? '…' : 'Join the list'}
+            </button>
+          </form>
+        )}
+        {status === 'error' && (
+          <p className="text-[13px] text-rose/80 sm:ml-3">Something went wrong — email us directly.</p>
+        )}
+      </div>
+    </div>
+  );
+};
 
 /* ============================================================
    2. THE RITUAL — hosted arrival passage + key/map vignette
@@ -2361,14 +2441,7 @@ const Location = () => (
    8b. WAITLIST — guest-facing email capture
    ============================================================ */
 const Waitlist = () => {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSubmitted(true);
-  };
+  const { email, setEmail, status, handleSubmit } = useWaitlist();
 
   return (
     <section id="waitlist" className="relative px-8 md:px-20 py-28 md:py-40 bg-ink text-parchment">
@@ -2386,28 +2459,37 @@ const Waitlist = () => {
           the general release. We'll write back if you have questions.
         </p>
 
-        {submitted ? (
+        {status === 'success' ? (
           <div className="space-y-4">
             <p className="font-hand text-[28px] text-parchment/90">You're on the list.</p>
             <p className="text-parchment/55 text-[16px]">We'll be in touch before 2027.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-[480px] mx-auto">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              className="flex-1 bg-transparent border border-parchment/35 px-5 py-3.5 text-parchment placeholder:text-parchment/35 text-[17px] font-body focus:outline-none focus:border-parchment/75 transition-colors"
-            />
-            <button
-              type="submit"
-              className="px-7 py-3.5 bg-parchment text-ink text-[14px] small-caps tracking-[0.14em] hover:bg-cream transition-colors whitespace-nowrap"
-            >
-              Join the list
-            </button>
-          </form>
+          <>
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-[480px] mx-auto">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="flex-1 bg-transparent border border-parchment/35 px-5 py-3.5 text-parchment placeholder:text-parchment/35 text-[17px] font-body focus:outline-none focus:border-parchment/75 transition-colors"
+              />
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="px-7 py-3.5 bg-parchment text-ink text-[14px] small-caps tracking-[0.14em] hover:bg-cream transition-colors whitespace-nowrap disabled:opacity-60"
+              >
+                {status === 'loading' ? '…' : 'Join the list'}
+              </button>
+            </form>
+            {status === 'error' && (
+              <p className="mt-4 text-[14px] text-rose/80">
+                Something went wrong — email us at{' '}
+                <a href="mailto:lodge@ludditelodge.com" className="underline underline-offset-2">lodge@ludditelodge.com</a>.
+              </p>
+            )}
+          </>
         )}
 
         <p className="font-hand text-[16px] text-parchment/40 mt-8">
@@ -2582,14 +2664,7 @@ const Opportunity = () => (
    10. FOOTER
    ============================================================ */
 const Footer = () => {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSubmitted(true);
-  };
+  const { email, setEmail, status, handleSubmit } = useWaitlist();
 
   return (
     <footer className="relative px-8 md:px-20 py-24 text-center">
@@ -2605,7 +2680,7 @@ const Footer = () => {
 
         {/* compact waitlist */}
         <div className="border-t border-ink/12 pt-10 mb-10">
-          {submitted ? (
+          {status === 'success' ? (
             <p className="font-hand text-[22px] text-ink/70">You're on the list. See you in 2027.</p>
           ) : (
             <>
@@ -2621,11 +2696,17 @@ const Footer = () => {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-ink text-parchment text-[12px] small-caps tracking-[0.14em] hover:bg-ink/85 transition-colors whitespace-nowrap"
+                  disabled={status === 'loading'}
+                  className="px-6 py-3 bg-ink text-parchment text-[12px] small-caps tracking-[0.14em] hover:bg-ink/85 transition-colors whitespace-nowrap disabled:opacity-60"
                 >
-                  Join
+                  {status === 'loading' ? '…' : 'Join'}
                 </button>
               </form>
+              {status === 'error' && (
+                <p className="mt-3 text-[13px] text-ink/50">
+                  Something went wrong — email us at lodge@ludditelodge.com.
+                </p>
+              )}
             </>
           )}
         </div>
@@ -2680,6 +2761,7 @@ function App() {
       <main className="relative font-body text-ink overflow-x-hidden">
         <TopBar />
         <Hero />
+        <EarlySignup />
         <SectionDivider />
         <Ritual />
         <Dimensions />
