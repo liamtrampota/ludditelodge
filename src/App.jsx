@@ -1889,7 +1889,7 @@ const DIMENSIONS = [
     title: 'Connection',
     body: [
       `The bistro sits at the heart of the lodge: a small bar, a few farm specials, and a long table for nights when everyone lands there at once. You can eat with the room or take a plate to the porch.`,
-      `During the day the shared kitchen stays easy — kettle on, beans ground, the bread board out. People can arrive alone here without spending the weekend that way.`,
+      `During the day the shared kitchen stays easy — kettle on, beans ground, the bread board out. People can arrive alone here without spending the weekend that way. Each season brings a short calendar of events: a visiting chef, a concert in the barn, an exhibition — something to arrive for.`,
     ],
     Plate: PlateConnection,
     cap: 'the bistro, single seating, seven thirty.',
@@ -1924,26 +1924,6 @@ const DIMENSIONS = [
     Plate: PlateSolitude,
     cap: 'the eastern A-frame — the long way around.',
   },
-  {
-    n: 'vi',
-    title: 'Events',
-    body: [
-      `Each season the lodge runs a short calendar: a concert in the barn, a visiting chef taking over the bistro, a small exhibition, an outdoor screening with a guest speaker. Open to current guests and a modest walk-in list.`,
-      `Nothing is ticketed far in advance. The schedule is printed and posted at the bar each week. The idea is that the best things here happen without much planning on your part.`,
-    ],
-    Plate: PlateEvents,
-    cap: 'the barn — first friday of the month.',
-  },
-  {
-    n: 'vii',
-    title: 'Residency',
-    body: [
-      `A small number of residents live and work at the lodge each season — a chef developing a menu, a woodworker building furniture for the rooms, a farmer on the kitchen garden, an artist finishing a body of work. Residencies run four to twelve weeks.`,
-      `Residents eat at the bistro, sleep in a lodge room, and contribute something specific to the place. The granary has been converted into a studio. Applications open in March.`,
-    ],
-    Plate: PlateResidency,
-    cap: 'the granary studio — residency hours.',
-  },
 ];
 
 const Dimensions = () => (
@@ -1952,10 +1932,10 @@ const Dimensions = () => (
       <div className="text-center max-w-[760px] mx-auto reveal mb-20 md:mb-28">
         <p className="small-caps text-[12px] text-ink/60 mb-5">ii. the dimensions</p>
         <h2 className="font-display text-[36px] md:text-[54px] leading-[1.05] tracking-[-0.01em]">
-          Seven ways a weekend can open.
+          Five ways a weekend can open.
         </h2>
         <p className="mt-6 text-ink2 text-[18px] leading-[1.65]">
-          The property is built around seven rhythms. None are mandatory. Most happen whether
+          The property is built around five rhythms. None are mandatory. Most happen whether
           you join in or simply let them shape the background.
         </p>
       </div>
