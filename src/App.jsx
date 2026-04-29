@@ -1623,27 +1623,27 @@ const TopBar = () => (
    1. HERO
    ============================================================ */
 const Hero = () => (
-  <section id="top" className="relative h-[100vh] min-h-[720px] w-full overflow-hidden">
+  <section id="top" className="relative h-[78vh] md:h-screen min-h-[520px] md:min-h-[720px] w-full overflow-hidden">
     {/* full-bleed plate — watercolor rendering */}
     <div className="absolute inset-0">
       <img
         src="/hero-lodge.png"
         alt="Luddite Lodge — watercolor rendering at golden hour"
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover object-[center_38%]"
       />
       {/* faint top-down vignette so type sits */}
-      <div className="hero-vignette absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(244,239,230,0.55) 0%, rgba(244,239,230,0) 32%, rgba(244,239,230,0) 60%, rgba(42,38,32,0.45) 100%)' }} />
+      <div className="hero-vignette absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(244,239,230,0.55) 0%, rgba(244,239,230,0) 32%, rgba(244,239,230,0) 55%, rgba(42,38,32,0.6) 100%)' }} />
     </div>
 
     {/* hero copy block — bottom-left, restrained */}
-    <div className="absolute inset-x-0 bottom-0 px-8 md:px-20 pb-20 md:pb-28 text-parchment">
+    <div className="absolute inset-x-0 bottom-0 px-6 md:px-20 pb-10 md:pb-28 text-parchment">
       <div className="max-w-[860px]">
-        <p className="small-caps text-[12px] text-parchment/80 mb-6">Catskills · phone-free weekends · opening 2027</p>
-        <h1 className="font-display text-[44px] md:text-[78px] leading-[0.98] tracking-[-0.01em] text-parchment" style={{ textShadow: '0 2px 24px rgba(20,16,10,0.55)' }}>
+        <p className="small-caps text-[11px] md:text-[12px] text-parchment/80 mb-4 md:mb-6">Catskills · phone-free weekends · opening 2027</p>
+        <h1 className="font-display text-[38px] md:text-[78px] leading-[0.98] tracking-[-0.01em] text-parchment" style={{ textShadow: '0 2px 24px rgba(20,16,10,0.55)' }}>
           A phone-free lodge<br />
           <span className="italic">in the Catskills.</span>
         </h1>
-        <p className="mt-8 max-w-[560px] text-parchment/90 text-[19px] leading-[1.55]" style={{ textShadow: '0 1px 12px rgba(20,16,10,0.6)' }}>
+        <p className="hidden md:block mt-8 max-w-[560px] text-parchment/90 text-[19px] leading-[1.55]" style={{ textShadow: '0 1px 12px rgba(20,16,10,0.6)' }}>
           Two hours from New York, Luddite Lodge trades pings for paper maps, long-table dinners,
           quiet rooms, and enough open space to hear yourself think again.
         </p>
@@ -1659,10 +1659,10 @@ const Hero = () => (
 const EarlySignup = () => {
   const { email, setEmail, status, handleSubmit } = useWaitlist();
   return (
-    <div className="relative bg-ink text-parchment px-8 md:px-20 py-6">
-      <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
-        <p className="small-caps text-[12px] text-parchment/70 tracking-[0.16em] shrink-0">
-          Opening 2027 · Early access for waitlist guests
+    <div className="relative bg-ink text-parchment px-6 md:px-20 py-4 md:py-6">
+      <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-5">
+        <p className="small-caps text-[11px] md:text-[12px] text-parchment/70 tracking-[0.16em] shrink-0">
+          Opening 2027 · <span className="hidden sm:inline">Early access for waitlist guests</span><span className="sm:hidden">Join the waitlist</span>
         </p>
         {status === 'success' ? (
           <p className="font-hand text-[20px] text-parchment/85">You're on the list. See you upstate.</p>
@@ -1697,7 +1697,7 @@ const EarlySignup = () => {
    2. THE RITUAL — hosted arrival passage + key/map vignette
    ============================================================ */
 const Ritual = () => (
-  <section id="ritual" className="relative px-8 md:px-20 pt-32 md:pt-44 pb-20">
+  <section id="ritual" className="relative px-6 md:px-20 pt-16 md:pt-44 pb-12 md:pb-20">
     <div className="max-w-[1280px] mx-auto grid md:grid-cols-12 gap-10 md:gap-16 items-center">
       <div className="md:col-span-6 reveal">
         <p className="small-caps text-[12px] text-ink/60 mb-6">i. the ritual</p>
@@ -1795,7 +1795,7 @@ const BeforeAfter = () => {
   }, []);
 
   return (
-    <section className="relative px-8 md:px-20 py-24 md:py-32 bg-parchment2/50">
+    <section className="relative px-6 md:px-20 py-14 md:py-32 bg-parchment2/50">
       <div className="max-w-[1280px] mx-auto">
         <div className="text-center mb-14 reveal">
           <p className="small-caps text-[12px] text-ink/60 mb-5">v. the difference</p>
@@ -1947,7 +1947,7 @@ const DIMENSIONS = [
 ];
 
 const Dimensions = () => (
-  <section className="relative px-8 md:px-20 py-24 md:py-36">
+  <section className="relative px-6 md:px-20 py-14 md:py-36">
     <div className="max-w-[1320px] mx-auto">
       <div className="text-center max-w-[760px] mx-auto reveal mb-20 md:mb-28">
         <p className="small-caps text-[12px] text-ink/60 mb-5">ii. the dimensions</p>
@@ -1961,11 +1961,35 @@ const Dimensions = () => (
       </div>
 
       <div className="space-y-28 md:space-y-40">
+        {/* Mobile: horizontal snap carousel */}
+        <div className="md:hidden -mx-6 px-6 overflow-x-auto snap-x snap-mandatory flex gap-5 pb-6 no-scrollbar">
+          {DIMENSIONS.map((d) => {
+            const Plate = d.Plate;
+            return (
+              <div key={d.title} className="snap-start shrink-0 w-[80vw] max-w-[340px] flex flex-col">
+                <div className="relative">
+                  <Plate className="w-full h-auto" />
+                  <p className="font-hand text-[15px] text-ink/60 mt-2 text-right pr-1">— {d.cap}</p>
+                </div>
+                <div className="mt-5">
+                  <p className="small-caps text-[10px] text-ink/55 mb-2">no. {d.n}</p>
+                  <h3 className="font-display text-[32px] leading-[1] mb-4 tracking-[-0.01em]">{d.title}</h3>
+                  <div className="space-y-3 text-ink2 text-[16px] leading-[1.65]">
+                    {d.body.map((p, j) => <p key={j}>{p}</p>)}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <p className="md:hidden text-center font-hand text-[16px] text-ink/45 -mt-2">← swipe to explore →</p>
+
+        {/* Desktop: alternating grid */}
         {DIMENSIONS.map((d, i) => {
           const flipped = i % 2 === 1;
           const Plate = d.Plate;
           return (
-            <div key={d.title} className="grid md:grid-cols-12 gap-10 md:gap-16 items-center reveal">
+            <div key={d.title} className="hidden md:grid md:grid-cols-12 gap-10 md:gap-16 items-center reveal">
               <div className={`md:col-span-7 ${flipped ? 'md:order-2' : ''}`}>
                 <div className="relative">
                   <Plate className="w-full h-auto" />
@@ -2025,7 +2049,7 @@ const STAYS = [
 ];
 
 const Accommodations = () => (
-  <section id="stay" className="relative px-8 md:px-20 py-24 md:py-32 bg-parchment2/50">
+  <section id="stay" className="relative px-6 md:px-20 py-14 md:py-32 bg-parchment2/50">
     <div className="max-w-[1320px] mx-auto">
       <div className="text-center max-w-[760px] mx-auto mb-20 reveal">
         <p className="small-caps text-[12px] text-ink/60 mb-5">iii. accommodations</p>
@@ -2082,7 +2106,7 @@ const LODGE_BITS = [
 ];
 
 const BarBistro = () => (
-  <section id="bar" className="relative px-8 md:px-20 py-24 md:py-36">
+  <section id="bar" className="relative px-6 md:px-20 py-14 md:py-36">
     <div className="max-w-[1320px] mx-auto">
       <div className="text-center max-w-[760px] mx-auto mb-20 reveal">
         <p className="small-caps text-[12px] text-ink/60 mb-5">iv. the lodge</p>
@@ -2159,7 +2183,7 @@ const SCHEDULE = [
 ];
 
 const Weekend = () => (
-  <section id="weekend" className="relative px-8 md:px-20 py-24 md:py-32">
+  <section id="weekend" className="relative px-6 md:px-20 py-14 md:py-32">
     <div className="max-w-[1180px] mx-auto">
       <div className="text-center max-w-[760px] mx-auto mb-16 reveal">
         <p className="small-caps text-[12px] text-ink/60 mb-5">vi. a sample weekend</p>
@@ -2230,7 +2254,7 @@ const EVENTS_LIST = [
 ];
 
 const Events = () => (
-  <section id="events" className="relative px-8 md:px-20 py-24 md:py-36 bg-parchment2/40">
+  <section id="events" className="relative px-6 md:px-20 py-14 md:py-36 bg-parchment2/40">
     <div className="max-w-[1180px] mx-auto">
       <div className="text-center max-w-[760px] mx-auto mb-16 reveal">
         <p className="small-caps text-[12px] text-ink/60 mb-5">vii. events</p>
@@ -2286,7 +2310,7 @@ const RESIDENCY_TRACKS = [
 ];
 
 const Residency = () => (
-  <section id="residency" className="relative px-8 md:px-20 py-24 md:py-36">
+  <section id="residency" className="relative px-6 md:px-20 py-14 md:py-36">
     <div className="max-w-[1180px] mx-auto">
       <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
         <div className="md:col-span-5 reveal">
@@ -2337,7 +2361,7 @@ const Residency = () => (
    9. ETHOS — long prose + pull quote
    ============================================================ */
 const Ethos = () => (
-  <section className="relative px-8 md:px-20 py-28 md:py-40 bg-parchment2/60">
+  <section className="relative px-6 md:px-20 py-16 md:py-40 bg-parchment2/60">
     <div className="max-w-[820px] mx-auto reveal">
       <p className="small-caps text-[12px] text-ink/60 mb-6 text-center">ix. ethos</p>
       <h2 className="font-display text-[36px] md:text-[54px] leading-[1.05] tracking-[-0.01em] text-center mb-14">
@@ -2390,7 +2414,7 @@ const Ethos = () => (
    8. LOCATION — hand-drawn Hudson Valley map
    ============================================================ */
 const Location = () => (
-  <section id="location" className="relative px-8 md:px-20 py-24 md:py-32">
+  <section id="location" className="relative px-6 md:px-20 py-14 md:py-32">
     <div className="max-w-[1320px] mx-auto">
       <div className="text-center max-w-[760px] mx-auto mb-16 reveal">
       <p className="small-caps text-[12px] text-ink/60 mb-5">x. the location</p>
@@ -2437,7 +2461,7 @@ const Waitlist = () => {
   const { email, setEmail, status, handleSubmit } = useWaitlist();
 
   return (
-    <section id="waitlist" className="relative px-8 md:px-20 py-28 md:py-40 bg-ink text-parchment">
+    <section id="waitlist" className="relative px-6 md:px-20 py-20 md:py-40 bg-ink text-parchment">
       <div className="max-w-[760px] mx-auto text-center reveal">
         <Mark size={34} className="mx-auto mb-10 opacity-60" />
         <p className="small-caps text-[12px] text-parchment/55 mb-6 tracking-[0.18em]">
@@ -2497,7 +2521,7 @@ const Waitlist = () => {
    9. THE OPPORTUNITY — investor section, editorial
    ============================================================ */
 const Opportunity = () => (
-  <section id="opportunity" className="relative px-8 md:px-20 py-28 md:py-36 bg-ink text-parchment">
+  <section id="opportunity" className="relative px-6 md:px-20 py-16 md:py-36 bg-ink text-parchment">
     <div className="max-w-[1280px] mx-auto">
 
       {/* — opener — */}

@@ -87,3 +87,13 @@ body.no-ornaments .ornament { display: none; }
 .ba-handle { cursor: ew-resize; touch-action: none; }
 .ba-handle:hover { transform: translate(-50%, -50%) scale(1.04); }
 svg { display: block; }
+
+/* Hide scrollbar for carousel */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Mobile baseline type scale */
+@media (max-width: 767px) {
+  body { font-size: 17px; }
+  .dropcap::first-letter { font-size: 3.8em; }
+}
